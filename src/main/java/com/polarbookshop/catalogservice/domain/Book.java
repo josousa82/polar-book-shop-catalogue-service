@@ -5,9 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
+
+// TODO 1. Move the validation logic to a DTO, if additional logic is passed here implement
+//  a command pattern or converter and sanitise before passing the request to the service and
+//  convert to DTO before returning as a response. it's a bad practice return the entity as
+//  response.
 public record Book(
         @NotBlank(message = "The book ISBN must be defined.")
-        @Pattern(regexp = "^([0-9]{10}|[0-13]{13})$", message = "The ISBN format must be valid")
+        @Pattern(regexp = "^([0-9]{10}|[0-13]{13})$", message = "The ISBN format must be valid.")
         String isbn,
 
         @NotBlank(message = "The book title must be defined.")
