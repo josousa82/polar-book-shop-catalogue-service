@@ -5,6 +5,8 @@ import com.polarbookshop.catalogservice.exceptions.BookAlreadyExistsException;
 import com.polarbookshop.catalogservice.exceptions.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+// TODO 2. Implement unit tests for service
 @Service
 public class BookService {
     private final BookRepository bookRepository;
