@@ -1,0 +1,14 @@
+<configuration>
+    <springProfile name="default">
+        <property name="LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${LOG_NAME:-${PID:- }} - %thread){faint} %clr(-){faint} %msg%n%throwable"/>
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+</configuration>
