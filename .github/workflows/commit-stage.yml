@@ -18,9 +18,6 @@ jobs:
           distribution: 'zulu'
           java-version: '17.0.12+7'
           cache: 'gradle'
-          cache-dependency-path: | # optional
-            sub-project/*.gradle*
-            sub-project/**/gradle-wrapper.properties
 
       - name: Code vulnerability scanning
         uses: anchore/scan-action@v3
