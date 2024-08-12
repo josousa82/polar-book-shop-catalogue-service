@@ -15,6 +15,4 @@ public class PolarProperties {
     }
 
     private String greeting;
-
-
 }
