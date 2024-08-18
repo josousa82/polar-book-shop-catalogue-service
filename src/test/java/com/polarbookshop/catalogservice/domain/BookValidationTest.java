@@ -20,42 +20,42 @@ class BookValidationTest {
 
     @Test
     void whenAllFieldsAreCorrectThenValidationSucceeds() {
-        var book = new Book("1234567890", "title", "author", 9.90);
+        var book = Book.of("1234567890", "title", "author", 9.90);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertTrue(violations.isEmpty());
     }
 
     @Test
     void whenBookIsbnIsIncorrectThenValidationFails() {
-        var book = new Book("123456789", "title", "author", 9.90);
+        var book =  Book.of("123456789", "title", "author", 9.90);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertEquals("The ISBN format must be valid.", violations.iterator().next().getMessage());
     }
 
     @Test
     void whenBookTitleIsEmptyThenValidationFails() {
-        var book = new Book("1234567890", "", "author", 9.90);
+        var book =  Book.of("1234567890", "", "author", 9.90);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertEquals("The book title must be defined.", violations.iterator().next().getMessage());
     }
 
     @Test
     void whenBookAuthorIsEmptyThenValidationFails() {
-        var book = new Book("1234567890", "Title", "", 9.90);
+        var book = Book.of("1234567890", "Title", "", 9.90);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertEquals("The book author must be defined.", violations.iterator().next().getMessage());
     }
 
     @Test
     void whenBookPriceIsZeroThenValidationFails() {
-        var book = new Book("1234567890", "Title", "Author", 0.0);
+        var book =  Book.of("1234567890", "Title", "Author", 0.0);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertEquals("The book price must be greater than zero.", violations.iterator().next().getMessage());
     }
 
     @Test
     void whenBookPriceIsNullThenValidationFails() {
-        var book = new Book("1234567890", "Title", "Author", null);
+        var book =  Book.of("1234567890", "Title", "Author", null);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertEquals("The book price must be defined.", violations.iterator().next().getMessage());
     }

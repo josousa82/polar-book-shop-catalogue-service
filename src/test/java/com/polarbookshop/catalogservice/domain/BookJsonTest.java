@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
-import org.springframework.boot.test.json.ObjectContent;
 
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ class BookJsonTest {
 
     @Test
     void testSerialize() throws IOException {
-        var book = new Book("1234567890", "title", "author", 9.90);
+        var book = Book.of("1234567890", "title", "author", 9.90);
         JsonContent<Book> jsonContent = json.write(book);
         JsonNode jsonNode = objectMapper.readTree(jsonContent.getJson());
         assertEquals("1234567890", jsonNode.get("isbn").asText());
@@ -43,7 +42,7 @@ class BookJsonTest {
                         "price": 9.90
                         }
                     """;
-        var expectedBook = new Book("1234567890", "Title", "Author", 9.90);
+        var expectedBook =  Book.of("1234567890", "Title", "Author", 9.90);
 
         var jsonContent = json.parse(content);
         assertThat(jsonContent).usingRecursiveComparison().isEqualTo(expectedBook);

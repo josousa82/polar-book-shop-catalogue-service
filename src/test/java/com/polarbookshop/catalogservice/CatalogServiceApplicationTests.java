@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-// TODO 4. Implement rest of integration tests
+// TODO 4. Implement rest of integration tests to test all the endpoints
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
@@ -25,7 +25,7 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestToAddBookThenBookIsCreated() {
-        var expectedBook = new Book("1234567890", "title", "author", 9.90);
+        var expectedBook =  Book.of("1234567890", "title", "author", 9.90);
         webTestClient
                 .post()
                 .uri("/books")
