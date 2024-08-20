@@ -1,8 +1,10 @@
 package com.polarbookshop.catalogservice.domain;
 
 
+import com.polarbookshop.catalogservice.domain.model.Book;
 import com.polarbookshop.catalogservice.exceptions.BookAlreadyExistsException;
 import com.polarbookshop.catalogservice.exceptions.BookNotFoundException;
+import com.polarbookshop.catalogservice.persistence.BookRepository;
 import org.springframework.stereotype.Service;
 
 

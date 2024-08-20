@@ -1,5 +1,6 @@
 package com.polarbookshop.catalogservice.domain;
 
+import com.polarbookshop.catalogservice.domain.model.Book;
 import jakarta.validation.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
