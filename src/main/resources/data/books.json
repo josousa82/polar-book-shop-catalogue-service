@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "author":"Marijn Haverbeke",
+      "isbn":"9781593279509",
+      "title":"Eloquent JavaScript, Third Edition",
+      "price":"9.99"
+    },
+    {
+      "author":"Nicolás Bevacqua",
+      "isbn":"9781491943533",
+      "title":"Practical Modern JavaScript",
+      "price":"10.99"
+    },
+    {
+      "author":"Nicholas C. Zakas",
+      "isbn":"9781593277574",
+      "title":"Understanding ECMAScript 6",
+      "price":"24.90"
+    },
+    {
+      "author":"Axel Rauschmayer",
+      "isbn":"9781449365035",
+      "title":"Speaking JavaScript",
+      "price":"50.58"
+    }
+  ]
+}

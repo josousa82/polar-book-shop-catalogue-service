@@ -1,11 +1,14 @@
 package com.polarbookshop.catalogservice.controllers;
 
 
+import com.polarbookshop.catalogservice.domain.dtos.BookDTO;
 import com.polarbookshop.catalogservice.domain.model.Book;
 import com.polarbookshop.catalogservice.domain.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("books")
@@ -17,7 +20,7 @@ public class BookController {
     }
 
     @GetMapping
-    public Iterable<Book> get() {
+    public List<BookDTO> get() {
         return bookService.viewBookList();
     }
 

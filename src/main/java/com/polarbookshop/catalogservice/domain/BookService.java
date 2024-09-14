@@ -1,24 +1,30 @@
 package com.polarbookshop.catalogservice.domain;
 
 
+import com.polarbookshop.catalogservice.domain.dtos.BookDTO;
+import com.polarbookshop.catalogservice.domain.mappers.BookMapper;
 import com.polarbookshop.catalogservice.domain.model.Book;
 import com.polarbookshop.catalogservice.exceptions.BookAlreadyExistsException;
 import com.polarbookshop.catalogservice.exceptions.BookNotFoundException;
 import com.polarbookshop.catalogservice.persistence.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 // TODO 2. Implement unit tests for service
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository){
+    public BookService(BookRepository bookRepository, BookMapper bookMapper){
         this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
-    public Iterable<Book> viewBookList(){
-        return bookRepository.findAll();
+    public List<BookDTO> viewBookList(){
+        return bookMapper.booksToBooksDTOs((List<Book>) bookRepository.findAll());
     }
 
     public Book viewBookDetails(String isbn){

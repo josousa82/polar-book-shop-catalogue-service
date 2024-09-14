@@ -5,14 +5,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polarbookshop.catalogservice.domain.model.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 
 @JsonTest
 class BookJsonTest {
@@ -20,7 +28,11 @@ class BookJsonTest {
     @Autowired
     private JacksonTester<Book> json;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @MockBean
+    private JdbcAggregateTemplate jdbcAggregateTemplate;
 
     @Test
     void testSerialize() throws IOException {
@@ -43,9 +55,15 @@ class BookJsonTest {
                         "price": 9.90
                         }
                     """;
-        var expectedBook =  Book.of("1234567890", "Title", "Author", 9.90);
+        Instant mockInstant = Instant.parse("2024-08-24T10:00:00Z");
+        var expectedBook =  new Book(1L,"1234567890", "Title", "Author", 9.90, mockInstant, mockInstant, 0);
+        when(jdbcAggregateTemplate.insert(expectedBook)).thenReturn(expectedBook);
 
-        var jsonContent = json.parse(content);
-        assertThat(jsonContent).usingRecursiveComparison().isEqualTo(expectedBook);
+        var bookJson = json.parse(content);
+
+        assertThat(bookJson).usingRecursiveComparison()
+                .ignoringFields("id","createdDate","lastModifiedDate", "version")
+                .isEqualTo(expectedBook);
+//        assertEquals(bookJson);
     }
 }
