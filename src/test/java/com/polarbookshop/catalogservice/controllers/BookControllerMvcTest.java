@@ -1,6 +1,6 @@
 package com.polarbookshop.catalogservice.controllers;
 
-import com.polarbookshop.catalogservice.domain.BookService;
+import com.polarbookshop.catalogservice.domain.BookServiceImpl;
 import com.polarbookshop.catalogservice.exceptions.BookNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class BookControllerMvcTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BookService bookService;
+    private BookServiceImpl bookService;
 
     @Test
     void whenGetBookingNotExistingThenShouldReturn404() throws Exception {

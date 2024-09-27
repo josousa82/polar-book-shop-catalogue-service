@@ -1,14 +1,9 @@
 package com.polarbookshop.catalogservice.domain.mappers;
 
 import com.polarbookshop.catalogservice.domain.dtos.BookDTO;
-import com.polarbookshop.catalogservice.domain.dtos.BookDTOs;
 import com.polarbookshop.catalogservice.domain.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @Mapper(componentModel = "spring")

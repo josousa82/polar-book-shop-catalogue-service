@@ -1,9 +1,9 @@
 package com.polarbookshop.catalogservice.controllers;
 
-
-import com.polarbookshop.catalogservice.domain.dtos.BookDTO;
-import com.polarbookshop.catalogservice.domain.model.Book;
 import com.polarbookshop.catalogservice.domain.BookService;
+import com.polarbookshop.catalogservice.domain.dtos.BookDTO;
+import com.polarbookshop.catalogservice.domain.BookServiceImpl;
+import com.polarbookshop.catalogservice.validators.annotations.ValidIsbn;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookServiceImpl bookService) {
         this.bookService = bookService;
     }
 
@@ -25,14 +25,15 @@ public class BookController {
     }
 
     @GetMapping("{isbn}")
-    public Book getBookByIsbn(@PathVariable String isbn) {
+    public BookDTO getBookByIsbn(@ValidIsbn @PathVariable String isbn) {
         return bookService.viewBookDetails(isbn);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book post(@Valid @RequestBody Book book) {
-        return bookService.addBookToCatalog(book);
+    public BookDTO post(@Valid @RequestBody BookDTO bookDTO) {
+
+        return bookService.addBookToCatalog(bookDTO);
     }
 
     @DeleteMapping("{isbn}")
@@ -42,7 +43,7 @@ public class BookController {
     }
 
     @PutMapping("{isbn}")
-    public Book put(@PathVariable String isbn, @Valid @RequestBody Book book) {
-        return bookService.editBookDetails(isbn, book);
+    public BookDTO put(@PathVariable @ValidIsbn String isbn, @Valid @RequestBody BookDTO bookDTO) {
+        return bookService.editBookDetails(isbn, bookDTO);
     }
 }
